@@ -18,6 +18,8 @@ WORKDIR /app
 RUN yum install -y shadow-utils && \
     groupadd -r spring && \
     useradd -r -g spring spring && \
+    mkdir -p /app/data && \
+    chown -R spring:spring /app/data && \
     yum remove -y shadow-utils && \
     yum clean all
 

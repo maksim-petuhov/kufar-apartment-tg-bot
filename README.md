@@ -18,10 +18,10 @@ Telegram бот для мониторинга новых объявлений о
 
 ## Технологии
 
-- Java 17
+- Java 21
 - Spring Boot
 - Spring Data JPA
-- PostgreSQL
+- SQLite
 - Telegram Bots API
 - Docker & Docker Compose
 
@@ -31,7 +31,6 @@ Telegram бот для мониторинга новых объявлений о
 
 - Java 21+
 - Docker и Docker Compose
-- PostgreSQL
 - Telegram Bot Token (получить у [@BotFather](https://t.me/BotFather))
 
 ### Настройка окружения
@@ -44,9 +43,7 @@ cp .env.example .env
 2. Заполните необходимые переменные окружения в файле `.env`:
 ```properties
 BOT_TOKEN=your_bot_token
-SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/your_db
-SPRING_DATASOURCE_USERNAME=your_username
-SPRING_DATASOURCE_PASSWORD=your_password
+DB_PATH=kufar_bot.db
 ```
 
 ### Запуск с помощью Docker

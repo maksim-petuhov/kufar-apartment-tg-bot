@@ -3,12 +3,8 @@ version: '3.8'
 services:
   app:
     build: .
-    depends_on:
-      - postgres
     environment:
-      - SPRING_DATASOURCE_URL=${DB_URL_DOCKER}
-      - SPRING_DATASOURCE_USERNAME=${DB_USERNAME}
-      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWORD}
+      - DB_PATH=/app/data/kufar_bot.db
       - BOT_USERNAME=${BOT_USERNAME}
       - BOT_TOKEN=${BOT_TOKEN}
       - KUFAR_BASE_URL=${KUFAR_BASE_URL}
@@ -18,23 +14,8 @@ services:
       - CHECK_INTERVAL=${CHECK_INTERVAL}
     ports:
       - "8080:8080"
-
-  postgres:
-    image: 'postgres:16.6'
-    environment:
-      - POSTGRES_DB=kufar-bot
-      - POSTGRES_USER=${DB_USERNAME}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-      - PGDATA=/var/lib/postgresql/data/kufar-bot
-    ports:
-      - "5400:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data/kufar-bot
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME} -d kufar-bot"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - sqlite_data:/app/data
 
 volumes:
-  postgres_data:
+  sqlite_data:
